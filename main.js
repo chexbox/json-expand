@@ -4,11 +4,14 @@ function expand(text) {
   let par = false;
   let indent = 0;
   while (a < text.length) {
-    if (text[a] == '"' && text[a - 1] !== "\") {
-      par = !par
-    };
-    if (text[a] == "{" || text[a] == "") {
-      
+    if (text[a] !== " ") {
+      output = output + text[a];
+      if (text[a] == '"' && text[a - 1] !== "\\") {
+        par = !par;
+      };
+      if (text[a] == "{" || text[a] == "") {
+        indent += 2;
+      };
     };
     a += 1;
   };
