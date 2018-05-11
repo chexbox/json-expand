@@ -3,8 +3,9 @@ function expand(text) {
   let output;
   let par;
   let last; //stores the last digit added to output
-  while (a < input.length) {
-    
+  while (a < text.length) {
+      if (text[a] == '"') {
+      };
     a += 1;
   };
 };
