@@ -3,6 +3,7 @@ function expand(text) {
   let newtext = "";
   let par = false;
   let indent = 0;
+  let i = 0;
   while (a < text.length) {
     if (text[a] !== " ") {
       newtext = newtext + text[a];
@@ -16,39 +17,39 @@ function expand(text) {
     if (newtext[a] == '"' && newtext[a - 1] !== "\\") {
       par = !par;
     };
-    if ((newtext[a] == "{" || newtext[a] == "[") && par = false) {
+    if ((newtext[a] == "{" || newtext[a] == "[") && par == false) {
       indent += 2;
       if (newtext[a+1] == ",") {
         output = output + newtext[a] + newtext[a+1] + "\n";
       } else {
         output = output + newtext[a] + "\n"
       };
-      let i;
+      i = 0;
       for (i = 0; i < indent; i++) {
         output = output + " ";
       };
     };
-    if ((newtext[a] == "}" || newtext[a] == "]") && par = false) {
+    if ((newtext[a] == "}" || newtext[a] == "]") && par == false) {
       indent += -2;
       if (newtext[a+1] == ",") {
         output = output + newtext[a] + newtext[a+1] + "\n";
       } else {
         output = output + newtext[a] + "\n"
       };
-      let i;
+      i = 0;
       for (i = 0; i < indent; i++) {
         output = output + " ";
       };
-      let i = 0;
-      while (newtext[a-i] !== " ") {
+      i = 0;
+      while (newtext[a-i] !== " " && a-i >= 0) {
         i += 1
       };
-      output = output.slice(0,(a-i)-2) = output.slice((a - i) + 1, output.length)
+      output = output.slice(0,(a-i)-2) + output.slice((a - i) + 1, output.length)
     };
     
     if (newtext[a] = "," && newtext[a - 1] !== "}" && newtext[a - 1] !== "]" && par !== false) {
       output = output + newtext[a] + "\n";
-      let i;
+      i = 0;
       for (i = 0; i < indent; i++) {
         output = output + " ";
       };
