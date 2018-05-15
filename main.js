@@ -14,16 +14,12 @@ function expand(text) {
   let output = "";
   while (a < newtext.length) {
     output = output + newtext[a];
-    if (newtext[a] == '"' && newtext[a - 1] !== "\\") {
+    if (newtext[a] == '"') {
       par = !par;
     };
     if ((newtext[a] == "{" || newtext[a] == "[") && par == false) {
       indent += 2;
-      if (newtext[a+1] == ",") {
-        output = output + newtext[a] + newtext[a+1] + "\n";
-      } else {
-        output = output + newtext[a] + "\n"
-      };
+      output = output + "\n"
       i = 0;
       for (i = 0; i < indent; i++) {
         output = output + " ";
@@ -32,9 +28,9 @@ function expand(text) {
     if ((newtext[a] == "}" || newtext[a] == "]") && par == false) {
       indent += -2;
       if (newtext[a+1] == ",") {
-        output = output + newtext[a] + newtext[a+1] + "\n";
+        output = output + newtext[a+1] + "\n";
       } else {
-        output = output + newtext[a] + "\n"
+        output = output + "\n"
       };
       i = 0;
       for (i = 0; i < indent; i++) {
@@ -47,8 +43,8 @@ function expand(text) {
       output = output.slice(0,(a-i)-2) + output.slice((a - i) + 1, output.length)
     };
     
-    if (newtext[a] = "," && newtext[a - 1] !== "}" && newtext[a - 1] !== "]" && par !== false) {
-      output = output + newtext[a] + "\n";
+    if (newtext[a] = "," && newtext[a - 1] !== "}" && newtext[a - 1] !== "]" && par == false) {
+      output = output + "\n";
       i = 0;
       for (i = 0; i < indent; i++) {
         output = output + " ";
@@ -56,4 +52,5 @@ function expand(text) {
     };
     a += 1;
   };
+  return output
 };
